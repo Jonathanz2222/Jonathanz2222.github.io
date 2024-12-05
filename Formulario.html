@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HardwarePC</title>
+    <link rel="stylesheet" href="css/Formulario.css">
+    <link rel="shortcut icon" href="img/GPU.jpg" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <nav class="menu">
+            <div class="logo">
+                <a href="Principal.html" target="_blank"><img src="img/GPU.jpg" alt="logo"></a>
+            </div>
+            <div class="boton-menu">
+                <a href="Principal.html" target="_blank">Inicio</a>
+                <a href="Tarjetas graficas.html" target="_blank">Tarjetas graficas</a>
+                <a href="Procesadores.html" target="_blank">Procesadores</a>
+                <a href="Combos Xeon.html" target="_blank">Combos Xeon</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="texto-movimiento">
+            <span>Por favor ingresa tus datos</span>
+        </div>
+        <form action="Datos.php" name="dbhpc" method="post">
+            <h2>Informacion</h2>
+            <h3><a class="regresar" href="#">Regresar</a></h3>
+            <input type="text" name="Nombre" placeholder="Nombre">
+            <input type="email" name="Correo" placeholder="Correo">
+            <input type="text" name="Telefono" placeholder="Telefono">
+            <textarea name="Mensaje" placeholder="Escriba su Mensaje"></textarea>
+            <input type="submit" value="Enviar" name="Enviar" id="Boton"> 
+        </form>
+    </main>
+    <footer>
+        <p>© 2024 HardwarePC. Todos los derechos reservados.</p>
+        <a href="https://www.facebook.com/jonathandejesus.delunagarcia" target="_blank"><img src="img/Facebook.png" alt="Facebook">Facebook</a>
+        <p><img src="img/Whatsapp.png" alt="Whatsapp">868-385-7258</p>
+    </footer>
+</body>
+</html>

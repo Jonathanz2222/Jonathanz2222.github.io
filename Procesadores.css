@@ -1,0 +1,144 @@
+*{
+    font-family: monospace;
+}
+
+/* Menu */
+
+.logo img{
+    height: 150px;
+    width: 150px;
+    border-radius: 10px;
+}
+
+.boton-menu a{
+    text-decoration: none;
+    color: #000;
+    border: 2px solid #000;
+    border-radius: 6px;
+    padding: 5px;
+}
+
+.boton-menu a:hover{
+    background-color: #7384a1;
+    color: #ffffff;
+    transition: 0.5s;
+}
+
+.menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: #eee7a6;
+}
+
+/* Texto en movimiento*/
+
+.texto-movimiento {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.texto-movimiento span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: mover 10s linear infinite;
+    margin: 15px;
+    font-size: 20px;
+}
+
+@keyframes mover {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}    
+
+/*Contenedores*/
+
+.contenedor img{
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+}
+
+.contenedor{
+    text-align: center;
+    background-color: #eee7a6;
+    height: 330px;
+    width: 330px;
+    display: inline-table;
+    margin: 5px;
+    border-radius: 10px;
+    border: 2px solid #000;
+}
+
+.contenedor:hover{
+    background-color: #7384a1;
+    transition: 0.5s;
+    color: #fff;
+}
+
+/*Footer*/
+
+footer a{
+    text-decoration: none;
+    color: #000000;
+}
+
+footer a:hover{
+    color: #fff;
+}
+
+footer p:hover{
+    color: #fff;
+}
+footer img{
+    height: 30px;
+    width: 30px;
+}
+
+footer{
+    text-align: center;
+    background-color: #7384a1;
+    font-size: 20px;
+    padding: 10px;
+    margin: 5px;
+}
+
+/*Responsive*/
+
+@media (max-width:768px){
+    .boton-menu{
+        flex-direction: column;
+        display: flex;
+    }
+
+    .contenedor{
+        width: 98%;
+    }
+}
+
+@media (max-width:1024px){
+    .contenedor{
+        width: 98%;
+    }
+
+    footer{
+        width: 96%;
+    }
+}
+
+@media (max-width:1920px){
+    .alinear1920{
+        margin-left: 100px;
+    }
+
+    .footer{
+        width: 96%;
+    }
+}
