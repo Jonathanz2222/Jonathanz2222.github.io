@@ -1,0 +1,21 @@
+    {
+    "name": "ForgePass",
+    "short_name": "ForgePass",
+    "start_url": "/menu.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#0A4DAB",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+        "src": "logo.png",
+        "type": "image/png",
+        "sizes": "192x192"
+        },
+        {
+        "src": "logo.png",
+        "type": "image/png",
+        "sizes": "512x512"
+        }
+    ]
+    }
