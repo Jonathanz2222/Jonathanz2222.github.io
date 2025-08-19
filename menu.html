@@ -1,0 +1,125 @@
+    <!-- HTML actualizado con funciones: propósito, QR, exportar/importar y clave maestra -->
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ForgePass - Generador de Contraseñas</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="shortcut icon" href="icono.png" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    </head>
+    <body>
+    <header class="hero">
+        <div class="top-bar">
+        <div class="top-left">FORGEPASS</div>
+        <div class="top-right-buttons" id="authButtons">
+            <button onclick="showRegister()">Crear cuenta</button>
+            <button onclick="showLogin()">Iniciar sesión</button>
+            <button onclick="loginWithKey()">Iniciar con llave</button>
+        </div>
+        <div class="top-right-buttons" id="profileControls" style="display: none;">
+            <button onclick="accessProfile()">Mi perfil</button>
+            <button onclick="logout()">Cerrar sesión</button>
+        </div>
+        </div>
+        <div class="hero-content reveal" id="hero">
+        <img src="logo.png" alt="Candado" class="logo" />
+        <div class="text-box">
+            <h1>Genera tu contraseña</h1>
+            <button onclick="document.getElementById('form').scrollIntoView({ behavior: 'smooth' })">GENERAR AHORA</button>
+        </div>
+        </div>
+    </header>
+
+    <main>
+        <h2>ForgePass</h2>
+        <p>Ahora estás más seguro</p>
+
+        <div class="form-section reveal" id="form">
+        <input type="text" id="customWord" placeholder="Ingrese su palabra clave" />
+
+        <div class="position-setting">
+            <label for="position">¿Dónde quieres tu palabra clave?</label>
+            <div class="custom-select-wrapper">
+            <select id="position">
+                <option value="start">Inicio</option>
+                <option value="middle">Centro</option>
+                <option value="end">Final</option>
+            </select>
+            </div>
+        </div>
+
+        <div class="context-setting">
+            <label for="context">¿Para qué es la contraseña?</label>
+            <br>
+            <div class="custom-select-wrapper">
+            <select id="context">
+                <option value="default">Personalizado</option>
+                <option value="R.social">Redes sociales</option>
+                <option value="Bancos">Bancos</option>
+                <option value="Juegos">Juegos</option>
+                <option value="Correo">Correo electrónico</option>
+            </select>
+            </div>
+        </div>
+
+        <div class="slider-container">
+            <label for="lengthRange">Longitud de la contraseña: <strong id="lengthValue">12</strong></label>
+            <div class="slider-wrapper">
+            <button type="button" id="decreaseLength">-</button>
+            <input type="range" id="lengthRange" min="6" max="50" value="12">
+            <button type="button" id="increaseLength">+</button>
+            </div>
+        </div>
+
+        <div class="char-options">
+            <label class="pill"><input type="checkbox" id="includeUpper" checked><span>ABC</span></label>
+            <label class="pill"><input type="checkbox" id="includeLower" checked><span>abc</span></label>
+            <label class="pill"><input type="checkbox" id="includeNumbers" checked><span>123</span></label>
+            <label class="pill"><input type="checkbox" id="includeSymbols"><span>#&$</span></label>
+        </div>
+
+        <button class="generate-btn" onclick="generatePassword()">Generar su contraseña</button>
+
+        <div class="output-container">
+            <div class="output-box" id="passwordOutput">Tu contraseña aparecerá aquí</div>
+        </div>
+
+        <div class="output-actions">
+            <button onclick="copyPassword()">Copiar</button>
+            <button onclick="downloadPassword()">Descargar</button>
+            <button onclick="generateQR()">QR</button>
+        </div>
+
+        <div id="qrContainer" style="text-align:center; margin-top: 10px;"></div>
+
+        <div class="strength-bar" id="strengthOutput">
+            <div class="bar" id="bar1"></div>
+            <div class="bar" id="bar2"></div>
+            <div class="bar" id="bar3"></div>
+        </div>
+        </div>
+
+    </main>
+
+        <!-- Modal autenticación -->
+    <div id="authModal" class="modal">
+    <div class="modal-content">
+        <h2 id="modalTitle">Iniciar sesión</h2>
+        <input id="emailInput" type="email" placeholder="Correo electrónico" />
+        <input id="passwordInput" type="password" placeholder="Contraseña" />
+        <div class="modal-buttons">
+        <button onclick="confirmAuth()">Confirmar</button>
+        <button onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+    <button id="backToTop" class="back-to-top" onclick="scrollToTop()">↑</button>
+    <script src="llave.js"></script>
+    <script src="script.js"></script>
+    </body>
+    </html>

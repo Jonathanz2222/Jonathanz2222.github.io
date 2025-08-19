@@ -1,0 +1,720 @@
+    /* Fondo y fuente global */
+    body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #7A4EE4, #0A4DAB);
+    color: white;
+    }
+
+    /* Hero (pantalla completa) */
+    .hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: linear-gradient(to right, #7A4EE4, #0A4DAB);
+    overflow: hidden;
+    }
+
+    /* Logo superior izquierdo */
+    .top-left {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    }
+
+    /* Contenido centrado */
+    .hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1100px;
+    gap: 4rem;
+    animation: slideUpFade 1.2s ease-out forwards;
+    opacity: 0;
+    transform: translateY(100px);
+    }
+
+    /* Logo de candado */
+    .logo {
+    width: 480px;
+    height: auto;
+    }
+
+    /* Texto y botón */
+    .text-box {
+    text-align: left;
+    }
+
+    .text-box h1 {
+    font-size: 3.2rem;
+    margin-bottom: 1.5rem;
+    color: white;
+    }
+
+    .text-box button {
+    background: white;
+    color: #0A4DAB;
+    border: none;
+    padding: 0.8rem 1.7rem;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .text-box button:hover {
+    transform: scale(1.05);
+    background: #f0f0f0;
+    }
+
+    /* Animación al entrar */
+    .hero-content {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .hero-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+    }
+
+    main {
+    background: linear-gradient(to right, #7A4EE4, #0A4DAB);
+    text-align: center;
+    padding: 4rem 1rem;
+    }
+
+    main h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    }
+
+    .form-section {
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    }
+
+    input, select, button {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    }
+
+    button {
+    background: #7A4EE4;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    }
+
+    /* Salida de la contraseña */
+    .output-box {
+    background: white;
+    color: #0A4DAB;
+    padding: 0.75rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    border-radius: 4px;
+    word-break: break-word;
+    }
+
+    /* Barra de fuerza */
+    .strength-bar {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.bar {
+    width: 30px;
+    height: 10px;
+    background: gray;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.bar.good {
+    background: limegreen;
+}
+
+.bar.medium {
+    background: orange;
+}
+
+.bar.weak {
+    background: red;
+}
+
+    /* Oculta la seccion inicialmente */
+    .reveal {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    /* Clase activa que anima la entrada */
+    .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+    }
+
+    input, select {
+    background-color: white;
+    color: #0A4DAB;
+    }
+
+    .form-section label {
+    text-align: left;
+    color: white;
+    }
+
+    .output-container {
+    display: flex;
+    align-items: center; /* Alinea verticalmente el cuadro y los botones */
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+    }
+
+    .output-box {
+    background: white;
+    color: #0A4DAB;
+    padding: 0.75rem 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    word-break: break-word;
+    min-width: 250px;
+    max-width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    }
+
+    .output-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    }
+
+    .output-actions button {
+    background: white;
+    color: #0A4DAB;
+    border: none;
+    padding: 0.75rem 1.2rem;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .output-actions button:hover {
+    transform: scale(1.05);
+    background: #e4e4e4;
+    }
+
+    .generate-btn {
+    background: white;
+    color: #0A4DAB;
+    border: none;
+    padding: 0.75rem 1.2rem;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+    margin-top: 1rem;
+    }
+
+    .generate-btn:hover {
+    transform: scale(1.05);
+    background: #e4e4e4;
+    }
+
+    .char-options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    }
+
+    .pill {
+        display: inline-block;
+    }
+
+    .pill input {
+        display: none;
+    }
+
+    .pill span {
+        background: white;
+        color: #0A4DAB;
+        padding: 0.75rem 1.2rem;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 0.9rem;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .pill input:checked + span {
+        background: #0A4DAB;
+        color: white;
+    }
+
+    .pill span:hover {
+        transform: scale(1.05);
+        background: #e4e4e4;
+    }
+
+    .position-setting {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    color: white;
+    gap: 0.3rem;
+    margin-top: 1rem;
+    }
+
+    .back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: white;
+    color: #0A4DAB;
+    border: none;
+    padding: 0.7rem 1rem;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    display: none; /* Oculto por defecto */
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    }
+
+    .back-to-top:hover {
+    transform: scale(1.1);
+    }
+
+    @media screen and (max-width: 768px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .logo {
+        width: 250px;
+    }
+
+    .text-box h1 {
+        font-size: 2rem;
+    }
+
+    .text-box button {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+    }
+
+    .form-section {
+        padding: 1.5rem;
+    }
+
+    .char-options {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .slider-wrapper {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .output-container {
+        flex-direction: column;
+    }
+
+    .output-box {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .output-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        font-size: 1.2rem;
+        padding: 0.6rem 0.9rem;
+    }
+    }
+
+    @media screen and (max-width: 480px) {
+    .top-left {
+        font-size: 1rem;
+        left: 15px;
+        top: 15px;
+    }
+
+    .text-box h1 {
+        font-size: 1.6rem;
+    }
+
+    main h2 {
+        font-size: 1.5rem;
+    }
+
+    .form-section input,
+    .form-section select,
+    .form-section button {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+    }
+
+    .top-right-buttons {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 1000;
+    }
+
+    .top-right-buttons button {
+    background: white;
+    color: #0A4DAB;
+    font-weight: bold;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    }
+
+    .top-right-buttons button:hover {
+    transform: scale(1.05);
+    background: #f0f0f0;
+    }
+
+.notification {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    color: #0A4DAB;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    font-size: 0.95rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 1001;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+    .saved-passwords {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    color: white;
+    }
+
+    .saved-passwords h2 {
+    margin-bottom: 1rem;
+    text-align: center;
+    }
+
+    #passwordList {
+    list-style: none;
+    padding: 0;
+    }
+
+    #passwordList li {
+    background: white;
+    color: #0A4DAB;
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap; /* permite que el contenido se acomode bien */
+    justify-content: space-between;
+    align-items: flex-start;
+    word-break: break-word;
+    gap: 0.5rem;
+    }
+
+    #passwordList button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    }
+
+    #passwordList button:hover {
+    background-color: darkred;
+    }
+
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 1002;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    }
+
+    .modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    color: #0A4DAB;
+    }
+
+    .modal-content input {
+    width: 100%;
+    padding: 0.7rem;
+    margin: 1rem 0;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    }
+
+    .modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    }
+
+    .modal-actions button {
+    background-color: #0A4DAB;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+
+    .modal-actions button:hover {
+    background-color: #083b85;
+    }
+
+    .custom-select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%; /* O ajusta al tamaño que quieras */
+    max-width: 300px;
+    }
+
+    .custom-select-wrapper select {
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+    color: #0A4DAB;
+    padding: 0.75rem 1rem;
+    padding-right: 2.5rem; /* espacio para la flecha */
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .custom-select-wrapper select:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.02);
+    }
+
+    .custom-select-wrapper select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(10, 77, 171, 0.3);
+    }
+
+    /* Flecha personalizada */
+    .custom-select-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    pointer-events: none;
+    border-left: 3px solid #0A4DAB;
+    border-bottom: 3px solid #0A4DAB;
+    transform: translateY(-50%) rotate(-45deg);
+    }
+
+    /* Evitar que el contenedor sea demasiado pequeño */
+    .custom-select-wrapper select {
+    min-width: 150px;
+    }
+
+    .modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    z-index: 10000;
+    }
+
+        /* Fondo oscuro para modal */
+    .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s forwards;
+    }
+
+    /* Contenido modal */
+    .modal-content {
+    background: #22222200;
+    color: #eee;
+    padding: 20px 30px;
+    border-radius: 10px;
+    max-width: 360px;
+    width: 90%;
+    box-shadow: 0 0 10px #444;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Inputs con estilo acorde */
+    .modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 12px 0;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    }
+
+    /* Botones del modal */
+    .modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    }
+
+    .modal-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    background-color: #0A4DAB;
+    color: white;
+    transition: background-color 0.2s ease;
+    }
+
+    .modal-buttons button:hover {
+    background: linear-gradient(to right, #7A4EE4, #0A4DAB);
+    }
+
+    /* Animación fadeIn */
+    @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+    }
+
+    #passwordList li span {
+    flex: 1 1 100%;
+    font-size: 0.95rem;
+    word-break: break-word;
+    }
+
+    @media screen and (min-width: 769px) {
+    #passwordList li {
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    #passwordList li span {
+        flex: 1;
+        margin-right: 1rem;
+    }
+
+    #passwordList li .button-group {
+        display: flex;
+        gap: 0.3rem;
+        justify-content: flex-end;
+        flex-shrink: 0;
+    }
+
+    #passwordList button {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
+    }
+
+@media screen and (max-width: 480px) {
+    .top-right-buttons {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.4rem;
+        right: 15px;
+        top: 15px;
+    }
+
+    .top-right-buttons button {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+        width: 120px;
+        text-align: center;
+    }
+}

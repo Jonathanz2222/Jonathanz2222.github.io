@@ -1,0 +1,215 @@
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Perfil - ForgePass</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    </head>
+    <body>
+    <header class="hero">
+        <div class="top-left">FORGEPASS</div>
+        <div class="top-right-buttons">
+        <button onclick="window.location.href='menu.html'">Menú</button>
+        </div>
+        <div class="hero-content visible" style="flex-direction: column; text-align: center;">
+        <h1 id="welcomeMessage">Hola, invitado</h1>
+        <div class="saved-passwords">
+        <h2>Mis contraseñas guardadas</h2>
+        <ul id="passwordList"></ul>
+        </div>
+    </header>
+        <script>
+    // Mostrar email del usuario actual
+    const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+    const mensajeBienvenida = document.getElementById("welcomeMessage");
+
+    if (usuario && usuario.email) {
+        mensajeBienvenida.textContent = `Hola, ${usuario.email}`;
+    } else {
+        mensajeBienvenida.textContent = "Hola, invitado";
+    }
+
+    function showNotification(message) {
+        const notif = document.getElementById("notification");
+        notif.textContent = message;
+        notif.classList.add("show");
+
+        setTimeout(() => {
+        notif.classList.remove("show");
+        }, 2500);
+    }
+
+    function showQR(password) {
+    // Crear modal o popup simple para mostrar el QR
+    let qrModal = document.getElementById("qrModal");
+    
+    if (!qrModal) {
+        qrModal = document.createElement("div");
+        qrModal.id = "qrModal";
+        qrModal.style.position = "fixed";
+        qrModal.style.top = "50%";
+        qrModal.style.left = "50%";
+        qrModal.style.transform = "translate(-50%, -50%)";
+        qrModal.style.background = "white";
+        qrModal.style.border = "2px solid #0A4DAB";
+        qrModal.style.padding = "1rem";
+        qrModal.style.zIndex = 9999;
+        qrModal.style.textAlign = "center";
+        qrModal.style.borderRadius = "8px";
+        qrModal.style.boxShadow = "0 0 10px rgba(0,0,0,0.3)";
+        
+        // Botón cerrar
+        const closeBtn = document.createElement("button");
+        closeBtn.textContent = "Cerrar";
+        closeBtn.style.marginTop = "10px";
+        closeBtn.style.padding = "0.3rem 0.6rem";
+        closeBtn.style.cursor = "pointer";
+        closeBtn.onclick = () => {
+        qrModal.remove();
+        };
+        
+        qrModal.appendChild(closeBtn);
+        document.body.appendChild(qrModal);
+    } else {
+        qrModal.innerHTML = ""; // Limpia contenido
+        document.body.appendChild(qrModal);
+    }
+    
+    // Generar QR
+    QRCode.toCanvas(password, { width: 200 }, function (err, canvas) {
+        if (err) {
+        alert("Error al generar código QR");
+        return;
+        }
+        qrModal.insertBefore(canvas, qrModal.firstChild);
+    });
+    }
+
+    function renderPasswordList() {
+        const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+        const listContainer = document.getElementById("passwordList");
+
+        listContainer.innerHTML = ""; // Limpiar lista
+
+        if (!usuario || !usuario.passwords || usuario.passwords.length === 0) {
+        listContainer.innerHTML = "<li>No tienes contraseñas guardadas.</li>";
+        return;
+        }
+
+        usuario.passwords.forEach((pass, index) => {
+        const li = document.createElement("li");
+        li.style.padding = "0.4rem";
+        li.style.background = "white";
+        li.style.color = "#0A4DAB";
+        li.style.borderRadius = "4px";
+        li.style.marginBottom = "0.5rem";
+        li.style.display = "flex";
+        li.style.justifyContent = "space-between";
+        li.style.alignItems = "center";
+
+        const text = document.createElement("span");
+        text.textContent = `${index + 1}. ${pass.password} (${pass.context})`;
+
+        // Botón Eliminar
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Eliminar";
+        deleteBtn.style.background = "red";
+        deleteBtn.style.color = "white";
+        deleteBtn.style.border = "none";
+        deleteBtn.style.borderRadius = "4px";
+        deleteBtn.style.padding = "0.3rem 0.6rem";
+        deleteBtn.style.cursor = "pointer";
+        deleteBtn.style.fontSize = "0.8rem";
+
+        deleteBtn.onclick = () => {
+            const allUsers = JSON.parse(localStorage.getItem("usuarios") || "[]");
+            const indexUsuario = allUsers.findIndex(u => u.email === usuario.email);
+            if (indexUsuario !== -1) {
+            allUsers[indexUsuario].passwords.splice(index, 1);
+            localStorage.setItem("usuarios", JSON.stringify(allUsers));
+            localStorage.setItem("usuarioActivo", JSON.stringify(allUsers[indexUsuario]));
+            renderPasswordList();
+            showNotification("Contraseña eliminada");
+            }
+        };
+
+        // Botón Copiar
+        const copyBtn = document.createElement("button");
+        copyBtn.textContent = "Copiar";
+        copyBtn.style.background = "white";
+        copyBtn.style.color = "#0A4DAB";
+        copyBtn.style.border = "none";
+        copyBtn.style.borderRadius = "4px";
+        copyBtn.style.padding = "0.3rem 0.6rem";
+        copyBtn.style.cursor = "pointer";
+        copyBtn.style.fontSize = "0.8rem";
+        copyBtn.style.marginLeft = "0.5rem";
+
+        copyBtn.onclick = () => {
+            navigator.clipboard.writeText(pass.password)
+            .then(() => showNotification("Contraseña copiada al portapapeles"))
+            .catch(() => showNotification("Error al copiar la contraseña"));
+        };
+
+        // Botón Descargar
+        const downloadBtn = document.createElement("button");
+        downloadBtn.textContent = "Descargar";
+        downloadBtn.style.background = "white";
+        downloadBtn.style.color = "#0A4DAB";
+        downloadBtn.style.border = "none";
+        downloadBtn.style.borderRadius = "4px";
+        downloadBtn.style.padding = "0.3rem 0.6rem";
+        downloadBtn.style.cursor = "pointer";
+        downloadBtn.style.fontSize = "0.8rem";
+        downloadBtn.style.marginLeft = "0.5rem";
+
+        downloadBtn.onclick = () => {
+            const blob = new Blob([pass.password], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "contraseña.txt";
+            link.click();
+            showNotification("Contraseña descargada");
+        };
+
+        // Botón QR
+        const qrBtn = document.createElement("button");
+        qrBtn.textContent = "QR";
+        qrBtn.style.background = "white";
+        qrBtn.style.color = "#0A4DAB";
+        qrBtn.style.border = "none";
+        qrBtn.style.borderRadius = "4px";
+        qrBtn.style.padding = "0.3rem 0.6rem";
+        qrBtn.style.cursor = "pointer";
+        qrBtn.style.fontSize = "0.8rem";
+        qrBtn.style.marginLeft = "0.5rem";
+
+        qrBtn.onclick = () => {
+        showQR(pass.password);
+        };
+
+        // Contenedor para botones
+        const btnContainer = document.createElement("div");
+        btnContainer.style.display = "flex";
+        btnContainer.style.gap = "0.3rem";
+
+        btnContainer.appendChild(deleteBtn);
+        btnContainer.appendChild(copyBtn);
+        btnContainer.appendChild(downloadBtn);
+        btnContainer.appendChild(qrBtn);
+
+        li.appendChild(text);
+        li.appendChild(btnContainer);
+        listContainer.appendChild(li);
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", renderPasswordList);
+    </script>
+        </div>
+
+    <div id="notification" class="notification"></div>
+    </body>
+    </html>
